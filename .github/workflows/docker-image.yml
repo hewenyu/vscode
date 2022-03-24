@@ -37,7 +37,7 @@ jobs:
           context: .
           file: ./Dockerfile
           build-arg: |
-              GO_VERSION=1.18
+              GO_VERSION=1.18.0
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
