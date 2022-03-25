@@ -2,6 +2,8 @@
 ARG GO_VERSION="1.16-buster"
 FROM golang:${GO_VERSION}
 
+WORKDIR /workspaces
+
 # Copy library scripts to execute
 COPY library-scripts/*.sh library-scripts/*.env /tmp/library-scripts/
 
@@ -29,13 +31,11 @@ ENV NVM_SYMLINK_CURRENT=true \
 RUN bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}" \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
+RUN curl -fsSL https://code-server.dev/install.sh | sh
+
 # Remove library scripts for final image
 RUN rm -rf /tmp/library-scripts
 
-RUN set -eux && \
-    apt-get update && sudo apt-get install -y ${BUILD_DEPS} && \
-    cd ~ && \
-    sudo curl -fsSL https://code-server.dev/install.sh | sh
 
 EXPOSE 8080
 
