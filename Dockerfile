@@ -10,4 +10,7 @@ LABEL maintainer="yuebanlaosiji@outlook.com"
 
 ENV BUILD_DEPS 'curl git gcc patch libc6-dev ca-certificates'
 RUN apt-get update && apt-get install -y ${BUILD_DEPS} --no-install-recommends
-RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
+
+RUN cd ~ && curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
+
+ENTRYPOINT [ "code-server" ]
