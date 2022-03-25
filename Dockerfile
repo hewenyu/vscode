@@ -2,8 +2,6 @@
 ARG GO_VERSION="1.16-buster"
 FROM golang:${GO_VERSION}
 
-WORKDIR /workspaces
-
 # Copy library scripts to execute
 COPY library-scripts/*.sh library-scripts/*.env /tmp/library-scripts/
 
@@ -38,6 +36,9 @@ RUN rm -rf /tmp/library-scripts
 
 
 USER vscode
+
+WORKDIR /workspaces
+
 
 EXPOSE 8080
 
