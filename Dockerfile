@@ -15,7 +15,7 @@ ENV TZ=Asia/Shanghai
 ENV BUILD_DEPS 'curl git gcc patch libc6-dev ca-certificates'
 
 RUN set -eux && \
-    sudo apt-get update && apt-get install -y ${BUILD_DEPS} && \
+    sudo apt-get update && sudo apt-get install -y ${BUILD_DEPS} && \
     cd ~ && \
     sudo curl -fsSL https://code-server.dev/install.sh | sh
 
