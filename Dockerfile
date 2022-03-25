@@ -1,12 +1,14 @@
 # GO_VERSION is provided by Cloud Build, and is set to the latest
 # version of Go. See the configuration in the deploy directory.
 
-# docker pull golang:1.18.0-buster
-ARG GO_VERSION="1.18.0"
+ARG GO_VERSION="1.16-buster"
 
-FROM golang:${GO_VERSION}-buster
+FROM mcr.microsoft.com/vscode/devcontainers/go:0-${GO_VERSION}
 
 LABEL maintainer="yuebanlaosiji@outlook.com"
+
+ENV GOPROXY=https://goproxy.cn,direct
+ENV TZ=Asia/Shanghai
 
 ENV BUILD_DEPS 'curl git gcc patch libc6-dev ca-certificates'
 
