@@ -7,7 +7,7 @@ vscode 带各种环境
 ```bash
 version: '3'
 services:
-  nsqlookupd:
+  vscode:
     image: hewenyulucky/vscode
     environment:
       - GOPROXY=https://goproxy.cn,direct
