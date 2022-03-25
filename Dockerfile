@@ -5,6 +5,8 @@ ARG GO_VERSION="1.16-buster"
 
 FROM mcr.microsoft.com/vscode/devcontainers/go:0-${GO_VERSION}
 
+USER vscode
+
 LABEL maintainer="yuebanlaosiji@outlook.com"
 
 ENV GOPROXY=https://goproxy.cn,direct
@@ -13,9 +15,9 @@ ENV TZ=Asia/Shanghai
 ENV BUILD_DEPS 'curl git gcc patch libc6-dev ca-certificates'
 
 RUN set -eux && \
-    apt-get update && apt-get install -y ${BUILD_DEPS} && \
+    sudo apt-get update && apt-get install -y ${BUILD_DEPS} && \
     cd ~ && \
-    curl -fsSL https://code-server.dev/install.sh | sh
+    sudo curl -fsSL https://code-server.dev/install.sh | sh
 
 EXPOSE 8080
 
