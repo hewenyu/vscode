@@ -17,3 +17,9 @@ services:
     restart: always
 
 ```
+
+## Password
+
+```bash
+cat ~/.config/code-server/config.yaml
+```
