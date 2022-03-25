@@ -9,8 +9,12 @@ FROM golang:${GO_VERSION}-buster
 LABEL maintainer="yuebanlaosiji@outlook.com"
 
 ENV BUILD_DEPS 'curl git gcc patch libc6-dev ca-certificates'
-RUN apt-get update && apt-get install -y ${BUILD_DEPS} --no-install-recommends
 
-RUN cd ~ && curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
+RUN set -eux && \
+    apt-get update && apt-get install -y ${BUILD_DEPS} && \
+    cd ~ && \
+    curl -fsSL https://code-server.dev/install.sh | sh -s -- --dry-run
 
-ENTRYPOINT [ "code-server" ]
+EXPOSE 8080
+
+ENTRYPOINT ["/usr/bin/code-server"]
