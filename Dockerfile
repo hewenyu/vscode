@@ -17,4 +17,4 @@ RUN set -eux && \
 
 EXPOSE 8080
 
-ENTRYPOINT ["/usr/bin/code-server"]
+ENTRYPOINT ["/usr/bin/code-server","--bind-addr","0.0.0.0:8080"]
