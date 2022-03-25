@@ -37,6 +37,8 @@ RUN curl -fsSL https://code-server.dev/install.sh | sh
 RUN rm -rf /tmp/library-scripts
 
 
+USER vscode
+
 EXPOSE 8080
 
 ENTRYPOINT ["/usr/bin/code-server","--bind-addr","0.0.0.0:8080"]
