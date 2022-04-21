@@ -36,9 +36,11 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: hewenyulucky/vscode
+          images: |
+              hewenyulucky/vscode
+              ccr.ccs.tencentyun.com/hewenyulucky/vscode
           tags: |
-              type=ref,event=branch
+              # type=ref,event=branch
               type=sha
               type=raw,value=latest
       - name: Build and push
@@ -52,5 +54,4 @@ jobs:
           push: true
           tags: |
               ${{ steps.meta.outputs.tags }}
-              ccr.ccs.tencentyun.com/${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
