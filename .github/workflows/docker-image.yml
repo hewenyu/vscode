@@ -28,9 +28,9 @@ jobs:
       - name: Login to AliYun Container Registry
         uses: docker/login-action@v1
         with:
-          registry: registry.cn-hangzhou.aliyuncs.com
-          username: ${{ secrets.ALI_DOCKER_USERNAME }}
-          password: ${{ secrets.ALI_DOCKER_PASSWORD }}
+          registry: ccr.ccs.tencentyun.com
+          username: ${{ secrets.TC_DOCKER_USERNAME }}
+          password: ${{ secrets.TC_DOCKER_PASSWORD }}
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
@@ -52,5 +52,5 @@ jobs:
           push: true
           tags: |
               ${{ steps.meta.outputs.tags }}
-              registry.cn-hangzhou.aliyuncs.com/${{ steps.meta.outputs.tags }}
+              ccr.ccs.tencentyun.com/${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
