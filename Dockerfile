@@ -56,26 +56,6 @@ RUN chmod +x /snap/bin/snapcraft
 # [Choice] Ubuntu version (use jammy or bionic on local arm64/Apple Silicon): jammy, focal, bionic
 FROM buildpack-deps:focal-curl
 
-COPY --from=builder /snap/core /snap/core
-COPY --from=builder /snap/core18 /snap/core18
-COPY --from=builder /snap/core20 /snap/core20
-COPY --from=builder /snap/snapcraft /snap/snapcraft
-COPY --from=builder /snap/bin/snapcraft /snap/bin/snapcraft
-
-# Generate locale and install dependencies.
-RUN apt-get update && apt-get dist-upgrade --yes && apt-get install --yes snapd sudo locales && locale-gen en_US.UTF-8
-
-
-# Set the proper environment.
-ENV LANG="en_US.UTF-8"
-ENV LANGUAGE="en_US:en"
-ENV LC_ALL="en_US.UTF-8"
-ENV PATH="/snap/bin:/snap/snapcraft/current/usr/bin:$PATH"
-ENV SNAP="/snap/snapcraft/current"
-ENV SNAP_NAME="snapcraft"
-ENV SNAP_ARCH=$BUILDARCH
-
-
 # Options for setup script
 ARG INSTALL_ZSH="true"
 ARG UPGRADE_PACKAGES="true"
@@ -88,10 +68,25 @@ RUN yes | unminimize 2>&1 \
     && bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" "true" "true" \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
+COPY --from=builder /snap/core /snap/core
+COPY --from=builder /snap/core18 /snap/core18
+COPY --from=builder /snap/core20 /snap/core20
+COPY --from=builder /snap/snapcraft /snap/snapcraft
+COPY --from=builder /snap/bin/snapcraft /snap/bin/snapcraft
+
+# Generate locale and install dependencies.
+RUN apt-get update && apt-get dist-upgrade --yes && apt-get install --yes snapd locales && locale-gen en_US.UTF-8 \
+    && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
 
-
-
+# # Set the proper environment.
+# ENV LANG="en_US.UTF-8"
+# ENV LANGUAGE="en_US:en"
+# ENV LC_ALL="en_US.UTF-8"
+# ENV PATH="/snap/bin:/snap/snapcraft/current/usr/bin:$PATH"
+# ENV SNAP="/snap/snapcraft/current"
+# ENV SNAP_NAME="snapcraft"
+# ENV SNAP_ARCH=$BUILDARCH
 
 
 # arch() {
