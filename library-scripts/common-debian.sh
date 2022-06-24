@@ -102,7 +102,7 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
         libkrb5-3 \
         libgssapi-krb5-2 \
         libicu[0-9][0-9] \
-        liblttng-ust0 \
+        liblttng-ust[0-9] \
         libstdc++6 \
         zlib1g \
         locales \
@@ -265,9 +265,9 @@ get_in_path_except_current() {
 }
 code="$(get_in_path_except_current code)"
 if [ -n "$code" ]; then
-    exec "$code" "https://github.com/microsoft/vscode-dev-containers/blob/main/containers/debian/.devcontainer/library-scripts/$@"
+    exec "$code" "$@"
 elif [ "$(command -v code-insiders)" ]; then
-    exec code-insiders "https://github.com/microsoft/vscode-dev-containers/blob/main/containers/debian/.devcontainer/library-scripts/$@"
+    exec code-insiders "$@"
 else
     echo "code or code-insiders is not installed" >&2
     exit 127
@@ -280,7 +280,7 @@ cat << 'EOF' > /usr/local/bin/systemctl
 #!/bin/sh
 set -e
 if [ -d "/run/systemd/system" ]; then
-    exec /bin/systemctl/systemctl "https://github.com/microsoft/vscode-dev-containers/blob/main/containers/debian/.devcontainer/library-scripts/$@"
+    exec /bin/systemctl/systemctl "$@"
 else
     echo '\n"systemd" is not running in this container due to its overhead.\nUse the "service" command to start services instead. e.g.: \n\nservice --status-all'
 fi

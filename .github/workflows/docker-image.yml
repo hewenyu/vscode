@@ -2,9 +2,13 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ main ]
+    branches: 
+      - 'main'
+      - 'ubuntu'
   pull_request:
-    branches: [ main ]
+    branches:
+      - 'main'
+      - 'ubuntu'
 
 jobs:
   build-container:
@@ -40,9 +44,9 @@ jobs:
               hewenyulucky/vscode
               ccr.ccs.tencentyun.com/hewenyulucky/vscode
           tags: |
-              # type=ref,event=branch
+              type=ref,event=branch
               type=sha
-              type=raw,value=latest
+              # type=raw,value=latest
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
