@@ -80,13 +80,13 @@ RUN apt-get update && apt-get dist-upgrade --yes && apt-get install --yes snapd 
 
 
 # # Set the proper environment.
-# ENV LANG="en_US.UTF-8"
-# ENV LANGUAGE="en_US:en"
-# ENV LC_ALL="en_US.UTF-8"
-# ENV PATH="/snap/bin:/snap/snapcraft/current/usr/bin:$PATH"
-# ENV SNAP="/snap/snapcraft/current"
-# ENV SNAP_NAME="snapcraft"
-# ENV SNAP_ARCH=$BUILDARCH
+ENV LANG="en_US.UTF-8"
+ENV LANGUAGE="en_US:en"
+ENV LC_ALL="en_US.UTF-8"
+ENV PATH="/snap/bin:/snap/snapcraft/current/usr/bin:$PATH"
+ENV SNAP="/snap/snapcraft/current"
+ENV SNAP_NAME="snapcraft"
+ENV SNAP_ARCH=$BUILDARCH
 
 
 # arch() {
