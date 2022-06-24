@@ -54,8 +54,7 @@ RUN chmod +x /snap/bin/snapcraft
 
 
 # [Choice] Ubuntu version (use jammy or bionic on local arm64/Apple Silicon): jammy, focal, bionic
-ARG VARIANT="focal"
-FROM buildpack-deps:${VARIANT}-curl
+FROM buildpack-deps:focal-curl
 
 COPY --from=builder /snap/core /snap/core
 COPY --from=builder /snap/core18 /snap/core18
