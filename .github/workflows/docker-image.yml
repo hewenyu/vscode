@@ -40,7 +40,7 @@ jobs:
               hewenyulucky/vscode
               ccr.ccs.tencentyun.com/hewenyulucky/vscode
           tags: |
-              # type=ref,event=branch
+              type=ref,event=branch
               type=sha
               type=raw,value=latest
       - name: Build and push
